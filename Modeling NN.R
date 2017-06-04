@@ -40,10 +40,36 @@ h2o.confusionMatrix(model)
 ## classify test set
 h2o_y_test <- h2o.predict(model, test_h2o)
 
-## convert H2O format into data frame and  save as csv
+## convert H2O format into data frame 
 df_y_test = as.data.frame(h2o_y_test)
-df_y_test = data.frame(Raise = seq(1,length(df_y_test$predict)), Label = df_y_test$predict)
-# write.csv(df_y_test, file = "submission-r-h2o.csv", row.names=F)
+df_y_test$predict <- ifelse(df_y_test$p1 < 0.5, 0, 1)
+df_y_test$actual <- testData$Raise
+confusionMatrix(df_y_test$predict, df_y_test$actual)
+# Confusion Matrix and Statistics
+# 
+#             Reference
+# Prediction   0   1
+# 0           79  72
+# 1           308 273
+# 
+# Accuracy : 0.4809          
+# 95% CI : (0.4441, 0.5178)
+# No Information Rate : 0.5287          
+# P-Value [Acc > NIR] : 0.9957          
+# 
+# Kappa : -0.0044         
+# Mcnemar's Test P-Value : <2e-16          
+# 
+# Sensitivity : 0.2041          
+# Specificity : 0.7913          
+# Pos Pred Value : 0.5232          
+# Neg Pred Value : 0.4699          
+# Prevalence : 0.5287          
+# Detection Rate : 0.1079          
+# Detection Prevalence : 0.2063          
+# Balanced Accuracy : 0.4977          
+# 
+# 'Positive' Class : 0  
 
 ## shut down virutal H2O cluster
 h2o.shutdown(prompt = F)
