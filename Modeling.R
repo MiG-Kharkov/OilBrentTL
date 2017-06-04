@@ -67,6 +67,7 @@ gbmFit
 
 ## Trying to predinct with Random Forest
 ctrl <- trainControl(method = "repeatedcv", repeats = 3)
+startTimeCalculatio <- proc.time()
 rfFit <-
   train(
     Raise ~ .,
@@ -75,7 +76,11 @@ rfFit <-
     trControl = ctrl,
     tuneLength = 3
   )
+startTimeCalculatio - proc.time()
+# user    system   elapsed 
+# -1021.104   -11.083 -1033.556 
 rfFit
+################################# Shift5
 # Random Forest 
 # 
 # 6855 samples
@@ -84,16 +89,16 @@ rfFit
 # 
 # No pre-processing
 # Resampling: Cross-Validated (10 fold, repeated 3 times) 
-# Summary of sample sizes: 6170, 6169, 6169, 6170, 6169, 6170, ... 
+# Summary of sample sizes: 6170, 6170, 6170, 6170, 6170, 6169, ... 
 # Resampling results across tuning parameters:
 #   
-#   mtry  Accuracy   Kappa     
-# 2    0.5201981  0.03422195
-# 16    0.5233112  0.04124285
-# 30    0.5243342  0.04313317
+#   mtry  Accuracy   Kappa    
+# 2    0.8211972  0.6388594
+# 16    0.8298052  0.6578388
+# 30    0.8279092  0.6539766
 # 
 # Accuracy was used to select the optimal model using  the largest value.
-# The final value used for the model was mtry = 30.
+# The final value used for the model was mtry = 16.
 
 ## k-Nearest Neighbors 
 
@@ -110,8 +115,11 @@ knnFit <- train(
   tuneLength = 20
 )
 startTimeCalculatio - proc.time()
+# user  system elapsed 
+# -95.024  -1.264 -96.644 
 
 knnFit
+################################# Shift5
 # k-Nearest Neighbors 
 # 
 # 6855 samples
@@ -120,35 +128,35 @@ knnFit
 # 
 # No pre-processing
 # Resampling: Cross-Validated (10 fold, repeated 3 times) 
-# Summary of sample sizes: 6169, 6169, 6170, 6169, 6170, 6169, ... 
+# Summary of sample sizes: 6169, 6170, 6168, 6169, 6170, 6170, ... 
 # Resampling results across tuning parameters:
 #   
-#   k   Accuracy   Kappa     
-# 5  0.5210838  0.03811022
-# 7  0.5198208  0.03502128
-# 9  0.5198683  0.03400540
-# 11  0.5179216  0.02966450
-# 13  0.5218610  0.03664417
-# 15  0.5149562  0.02218618
-# 17  0.5153937  0.02279340
-# 19  0.5128645  0.01708174
-# 21  0.5113553  0.01348067
-# 23  0.5130580  0.01685405
-# 25  0.5129108  0.01626722
-# 27  0.5140774  0.01809427
-# 29  0.5167999  0.02332974
-# 31  0.5177252  0.02510494
-# 33  0.5203501  0.03040405
-# 35  0.5183578  0.02606487
-# 37  0.5210794  0.03115754
-# 39  0.5202036  0.02929306
-# 41  0.5200582  0.02862983
-# 43  0.5169455  0.02219816
+#   k   Accuracy   Kappa    
+# 5  0.7167029  0.4282726
+# 7  0.7355696  0.4661359
+# 9  0.7456835  0.4861480
+# 11  0.7554071  0.5057486
+# 13  0.7625551  0.5199579
+# 15  0.7677575  0.5302606
+# 17  0.7753909  0.5456146
+# 19  0.7746612  0.5439016
+# 21  0.7763640  0.5471856
+# 23  0.7804489  0.5554654
+# 25  0.7847268  0.5639286
+# 27  0.7842414  0.5626805
+# 29  0.7856018  0.5653238
+# 31  0.7859432  0.5659640
+# 33  0.7876939  0.5695539
+# 35  0.7889088  0.5721656
+# 37  0.7911950  0.5766768
+# 39  0.7932854  0.5810275
+# 41  0.7951821  0.5847655
+# 43  0.7968858  0.5881155
 # 
 # Accuracy was used to select the optimal model using  the largest value.
-# The final value used for the model was k = 13.
+# The final value used for the model was k = 43.
 set.seed(123)
-grid <- expand.grid(k=12:14)
+grid <- expand.grid(k=43:50)
 startTimeCalculatio <- proc.time()
 knnFit <- train(
   Raise ~ .,
@@ -159,9 +167,10 @@ knnFit <- train(
 )
 startTimeCalculatio - proc.time()
 # user  system elapsed 
-# -13.857  -0.182 -14.083 
+# -43.321  -0.653 -44.277 
 
 knnFit
+################################# Shift5
 # k-Nearest Neighbors 
 # 
 # 6855 samples
@@ -170,14 +179,19 @@ knnFit
 # 
 # No pre-processing
 # Resampling: Cross-Validated (10 fold, repeated 3 times) 
-# Summary of sample sizes: 6169, 6169, 6170, 6169, 6170, 6169, ... 
+# Summary of sample sizes: 6169, 6170, 6168, 6169, 6170, 6170, ... 
 # Resampling results across tuning parameters:
 #   
-#   k   Accuracy   Kappa     
-# 12  0.5180681  0.02994637
-# 13  0.5219581  0.03683099
-# 14  0.5206947  0.03437618
+#   k   Accuracy   Kappa    
+# 43  0.7967884  0.5879061
+# 44  0.7970310  0.5883626
+# 45  0.7985396  0.5914573
+# 46  0.7972741  0.5888359
+# 47  0.7980536  0.5903914
+# 48  0.7995603  0.5935059
+# 49  0.8002423  0.5947666
+# 50  0.8012625  0.5968246
 # 
 # Accuracy was used to select the optimal model using  the largest value.
-# The final value used for the model was k = 13.
+# The final value used for the model was k = 50.
 
