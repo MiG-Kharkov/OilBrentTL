@@ -16,9 +16,11 @@ windowBasedData %>%
   mutate(Raise = ifelse(.[1] < .[2] , 1, 0)) -> raiseFactor
 
 windowBasedData <- cbind(windowBasedData[1:sizeWindow], raiseFactor[3])
+windowBasedData$Raise <- as.factor(windowBasedData$Raise)
 
 windowBasedData %>%
   slice(1:trainLength) -> trainData
+
 windowBasedData %>%
   slice((trainLength + 1):(allRecords - sizeWindow)) -> testData
         
