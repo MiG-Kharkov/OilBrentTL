@@ -6,15 +6,15 @@ trainLength <- round(allRecords * 0.9)
 
 windowBasedData <- NULL
 for (i in 1:(allRecords - sizeWindow)) {
-  sliceData <- as.data.frame(t(ds$V2[i:(i + sizeWindow)]))
+  sliceData <-
+    c(ds$tShift1[i:(i + sizeWindow - 1)], ifelse(ds$tShift1[i + sizeWindow] >
+                                                   0, 1, 0))
+  sliceData <- as.data.frame(t(sliceData))
   windowBasedData <- rbind(windowBasedData, sliceData)
 }
 
-windowBasedData %>%
-  select(num_range("V", sizeWindow:(sizeWindow + 1))) %>%
-  mutate(Raise = ifelse(.[1] < .[2] , 1, 0)) -> raiseFactor
+windowBasedData <- rename(windowBasedData, Raise = V31)
 
-windowBasedData <- cbind(windowBasedData[1:sizeWindow], raiseFactor[3])
 windowBasedData$Raise <- as.factor(windowBasedData$Raise)
 
 windowBasedData %>%
