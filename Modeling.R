@@ -16,8 +16,8 @@ library(e1071)
 fitControl <- trainControl(## 10-fold CV
   method = "repeatedcv",
   number = 10,
-  ## repeated ten times
-  repeats = 10)
+  ## repeated 3 times
+  repeats = 3)
 
 set.seed(123)
 startTimeCalculatio <- proc.time()
@@ -32,9 +32,10 @@ gbmFit <- train(
 )
 startTimeCalculatio - proc.time()
 # user   system  elapsed 
-# -299.240   -2.034 -301.618 
+# -90.507  -0.646 -91.166 
 
 gbmFit
+################################# Shift5
 # Stochastic Gradient Boosting 
 # 
 # 6855 samples
@@ -42,26 +43,26 @@ gbmFit
 # 2 classes: '0', '1' 
 # 
 # No pre-processing
-# Resampling: Cross-Validated (10 fold, repeated 10 times) 
-# Summary of sample sizes: 6169, 6169, 6170, 6169, 6170, 6169, ... 
+# Resampling: Cross-Validated (10 fold, repeated 3 times) 
+# Summary of sample sizes: 6169, 6170, 6168, 6169, 6170, 6170, ... 
 # Resampling results across tuning parameters:
 #   
-#   interaction.depth  n.trees  Accuracy   Kappa     
-# 1                   50      0.5227144  0.01435447
-# 1                  100      0.5174171  0.01101794
-# 1                  150      0.5150702  0.01055232
-# 2                   50      0.5187465  0.01257207
-# 2                  100      0.5146309  0.01125187
-# 2                  150      0.5130869  0.01131724
-# 3                   50      0.5189526  0.01670897
-# 3                  100      0.5148521  0.01442258
-# 3                  150      0.5145440  0.01674194
+#   interaction.depth  n.trees  Accuracy   Kappa    
+# 1                   50      0.7982950  0.5916805
+# 1                  100      0.8202728  0.6376080
+# 1                  150      0.8294142  0.6562493
+# 2                   50      0.8163351  0.6297374
+# 2                  100      0.8324799  0.6625231
+# 2                  150      0.8373417  0.6723777
+# 3                   50      0.8267906  0.6510312
+# 3                  100      0.8384112  0.6745603
+# 3                  150      0.8409395  0.6797384
 # 
 # Tuning parameter 'shrinkage' was held constant at a value of 0.1
 # Tuning
 # parameter 'n.minobsinnode' was held constant at a value of 10
 # Accuracy was used to select the optimal model using  the largest value.
-# The final values used for the model were n.trees = 50, interaction.depth = 1, shrinkage
+# The final values used for the model were n.trees = 150, interaction.depth = 3, shrinkage
 # = 0.1 and n.minobsinnode = 10.
 
 ## Trying to predinct with Random Forest
