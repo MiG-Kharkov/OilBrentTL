@@ -1,4 +1,3 @@
-install.packages("h2o")
 library(h2o)
 
 ## start a local h2o cluster
@@ -27,14 +26,16 @@ model =
 
 ## print time elapsed
 s - proc.time()
+# user  system elapsed 
+# -0.485  -0.022  -6.768 
 
 ## print confusion matrix
 h2o.confusionMatrix(model)
-# Confusion Matrix (vertical: actual; across: predicted)  for max f1 @ threshold = 0.495705214443377:
-#         0    1    Error        Rate
-# 0       9 3570 0.997485  =3570/3579
-# 1       3 3590 0.000835     =3/3593
-# Totals 12 7160 0.498187  =3573/7172
+# Confusion Matrix (vertical: actual; across: predicted)  for max f1 @ threshold = 0.469777047781609:
+#          0    1    Error        Rate
+# 0      283 3296 0.920928  =3296/3579
+# 1       92 3488 0.025698    =92/3580
+# Totals 375 6784 0.473250  =3388/7159
 
 ## classify test set
 h2o_y_test <- h2o.predict(model, test_h2o)
