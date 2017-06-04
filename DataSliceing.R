@@ -2,7 +2,6 @@
 # Подготовка данных для моделирования
 
 sizeWindow <- 30
-allRecords <- length(oil.xts)
 trainLength <- round(allRecords * 0.9)
 
 windowBasedData <- NULL
