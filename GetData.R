@@ -2,6 +2,7 @@
 # Блок загрузки данных
 if (!require("tseries")) install.packages("tseries")
 if (!require("forecast")) install.packages("forecast")
+if(!"recommenderlab" %in% rownames(installed.packages())){install.packages("recommenderlab")}
 library(ggplot2)
 library(data.table)
 library(tseries)
@@ -20,11 +21,3 @@ allRecords <- nrow(ds)
 ds$tShift1 <- c(0,ds$V2[2:allRecords]-ds$V2[1:(allRecords-1)])
 ds$tShift2 <- c(0,0,ds$V2[3:allRecords]-ds$V2[1:(allRecords-2)])
 ds$tShift5 <- c(0,0,0,0,0,ds$V2[6:allRecords]-ds$V2[1:(allRecords-5)])
-
-xts(ds$V2, order.by = ds$V1) -> oil.xts
-xts(ds$tShift1, order.by = ds$V1) -> oil.xts.shift1
-xts(ds$tShift2, order.by = ds$V1) -> oil.xts.shift2
-xts(ds$tShift5, order.by = ds$V1) -> oil.xts.shift5
-
-
-df.oil.xts <- diff(oil.xts)
