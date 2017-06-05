@@ -1,5 +1,7 @@
 # Part 2
 # Блок визуализации
+# http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+
 plot(oil.xts)
 plot(oil.xts.shift1)
 plot(oil.xts.shift2)
@@ -21,22 +23,28 @@ library(tidyr)
 library("gridExtra")
 library("cowplot")
 df_y_test %>%
-  filter(actual != predict) %>%
-  gather("isRaise", "Prob", 2:3) %>%  
-  ggplot(aes(isRaise, Prob)) + geom_boxplot() -> gFails
+  filter(actual != predict, actual== 1) %>%
+  gather("isRaise", "Prob", 1:2) %>%  
+  ggplot(aes(isRaise, Prob)) + geom_boxplot() -> gFailsFalse
+
+df_y_test %>%
+  filter(actual != predict, actual == 0) %>%
+  gather("isRaise", "Prob", 1:2) %>%  
+  ggplot(aes(isRaise, Prob)) + geom_boxplot() -> gFailsTrue
 
 df_y_test %>%
   filter(actual == predict, actual == 1) %>%
-  gather("isRaise", "Prob", 2:3) %>%  
+  gather("isRaise", "Prob", 1:2) %>%  
   ggplot(aes(isRaise, Prob)) + geom_boxplot() -> gAccurateTrue 
 
 df_y_test %>%
   filter(actual == predict, actual == 0) %>%
-  gather("isRaise", "Prob", 2:3) %>%  
+  gather("isRaise", "Prob", 1:2) %>%  
   ggplot(aes(isRaise, Prob)) + geom_boxplot() -> gAccurateFalse
 
 ggdraw() +
-  draw_plot(gFails, 0, .5, 1, .5) +
+  draw_plot(gFailsFalse, 0, .5, 0.5, .5) +
+  draw_plot(gFailsTrue, 0.5, .5, 0.5, .5) +
   draw_plot(gAccurateFalse, 0, 0, .5, .5) +
   draw_plot(gAccurateTrue, .5, 0, .5, .5) +
   draw_plot_label(c("Fails", "Good"), 

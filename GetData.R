@@ -25,3 +25,6 @@ xts(ds$V2, order.by = ds$V1) -> oil.xts
 xts(ds$tShift1, order.by = ds$V1) -> oil.xts.shift1
 xts(ds$tShift2, order.by = ds$V1) -> oil.xts.shift2
 xts(ds$tShift5, order.by = ds$V1) -> oil.xts.shift5
+
+
+df.oil.xts <- diff(oil.xts)
