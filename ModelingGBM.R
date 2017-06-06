@@ -18,7 +18,7 @@ gbmGrid <-  expand.grid(interaction.depth = c(1, 5, 9),
                         shrinkage = 0.1,
                         n.minobsinnode = 20)
 set.seed(123)
-startTimeCalculatio <- proc.time()
+startTimeCalculation <- proc.time()
 gbmFit <- train(Raise ~ .,data = trainData,
   method = "gbm",
   trControl = fitControl,
@@ -29,7 +29,7 @@ gbmFit <- train(Raise ~ .,data = trainData,
   ## to evaluate:
   tuneGrid = gbmGrid
 )
-startTimeCalculatio - proc.time()
+startTimeCalculation - proc.time()
 # user    system   elapsed 
 # -5789.775   -11.074 -5804.945 
 
@@ -73,7 +73,7 @@ gbmGrid <-  expand.grid(interaction.depth = c(3,5,7,9),
                         shrinkage = 0.1,
                         n.minobsinnode = 20)
 set.seed(123)
-startTimeCalculatio <- proc.time()
+startTimeCalculation <- proc.time()
 gbmFit <- train(Raise ~ .,data = trainData,
                 method = "gbm",
                 trControl = fitControl,
@@ -84,7 +84,7 @@ gbmFit <- train(Raise ~ .,data = trainData,
                 ## to evaluate:
                 tuneGrid = gbmGrid
 )
-startTimeCalculatio - proc.time()
+startTimeCalculation - proc.time()
 # user    system   elapsed 
 # 806.490   -4.170 -810.707 
 
@@ -128,7 +128,7 @@ gbmGrid <-  expand.grid(interaction.depth = 7,
                         shrinkage = 0.1,
                         n.minobsinnode = 20)
 set.seed(123)
-startTimeCalculatio <- proc.time()
+startTimeCalculation <- proc.time()
 gbmFit <- train(Raise ~ .,data = trainData,
                 method = "gbm",
                 trControl = fitControl,
@@ -139,7 +139,7 @@ gbmFit <- train(Raise ~ .,data = trainData,
                 ## to evaluate:
                 tuneGrid = gbmGrid
 )
-startTimeCalculatio - proc.time()
+startTimeCalculation - proc.time()
 # user    system   elapsed 
 # -151.464   -1.406 -153.438 
 

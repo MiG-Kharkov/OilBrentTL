@@ -4,13 +4,15 @@ xts(ds$V2, order.by = ds$V1) -> oil.xts
 # xts(ds$tShift5, order.by = ds$V1) -> oil.xts.shift5
 
 tsdisplay(oil.xts)
-
 df.oil.xts <- diff(oil.xts)
 tsdisplay(df.oil.xts)
 
+sizeWindow <- 30
 nPrediction <- 10
 
-train.oil.xts <- oil.xts[1 : (allRecords-nPrediction)]
+oil.xts[
+  (allRecords - sizeWindow - nPrediction):(allRecords - nPrediction)
+  ] -> train.oil.xts
 
 # автоматический подбор модели
 mod_a <- auto.arima(train.oil.xts)
